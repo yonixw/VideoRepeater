@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,13 +14,28 @@ namespace VideoReapeater
     {
         public Form1()
         {
+            SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
             InitializeComponent();
         }
 
-        
+        private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        {
+            if (e.Mode == Microsoft.Win32.PowerModes.StatusChange)
+            {
+                if (SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline)
+                {
+                    MessageBox.Show("No Power, using Batery!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline)
+            {
+                MessageBox.Show("No Power, using Batery!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             axPlayer.URL = Environment.GetCommandLineArgs().Last();
             axPlayer.settings.setMode("loop", true);
             axPlayer.settings.volume = 100;
