@@ -20,13 +20,13 @@ namespace VideoReapeater
 
         private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
-            if (e.Mode == Microsoft.Win32.PowerModes.StatusChange)
-            {
-                if (SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline)
-                {
-                    MessageBox.Show("No Power, using Batery!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
+            //if (e.Mode == Microsoft.Win32.PowerModes.StatusChange)
+            //{
+            //    if (SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline)
+            //    {
+            //        MessageBox.Show("No Power, using Batery!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    }
+            //}
         }
 
         private void Form1_Load(object sender, EventArgs e)
